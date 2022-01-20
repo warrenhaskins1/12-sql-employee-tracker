@@ -1,0 +1,29 @@
+{
+  "name": "12-sql-employee-tracker",
+  "version": "1.0.0",
+  "description": "Employee tracker using MySql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warrenhaskins1/12-sql-employee-tracker.git"
+  },
+  "keywords": [
+    "sql",
+    "employee",
+    "tracker"
+  ],
+  "author": "Warren Haskins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/warrenhaskins1/12-sql-employee-tracker/issues"
+  },
+  "homepage": "https://github.com/warrenhaskins1/12-sql-employee-tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3"
+  }
+}
