@@ -23,4 +23,3 @@ CREATE TABLE employee (
     manager_id INT NULL
 );
 
---relationships: department_id->role.department_id, role_id->employee.role_id, employee_id->employee.manager_id--
