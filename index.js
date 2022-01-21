@@ -18,20 +18,17 @@ const db = mysql.createConnection(
   //node index.js --> works/connection established
 );
 
-//Query that returns all data from db
-// db.query("SELECT * FROM employees_db", function (err, results) {
-//     console.log(results);
-// });
+
 
 //inquirer prompts start
 
-function startApp() {
+function promptStart() {
   inquirer
     .prompt({
       type: "list",
       name: "initQuestions",
       message:
-        "Welcome! Please choose an action from the options provided below (Use the arrow keys).",
+        "Please choose an action from the options provided below (Use the arrow keys).",
       choice: [
         "View all Departments",
         "View all Roles",
@@ -81,6 +78,7 @@ function startApp() {
 function viewDepartments() {
   db.query("SELECT * FROM departments", function (err, results) {
     console.table(results);
+    promptStart();
   });
 }
 
@@ -88,22 +86,46 @@ function viewDepartments() {
 function viewRoles() {
   db.query("SELECT * FROM roles", function (err, results) {
     console.table(results);
+    promptStart();
   });
 }
 
 //Should return table with employee id, fname/lname, title, dept, salary and manager
 function viewEmployees() {
-    const query = 
+  const query =
     "SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, departments.dname AS department, employees.manager_id" +
     "FROM employees" +
     "JOIN roles ON roles.id = employees.role_id" +
     "JOIN departments ON roles.department_id = departments.id" +
     "ORDER BY employees.id;";
 
-    db.query(query, function (err, result) {
-        console.table(result);
-    });
-    // db.query("SELECT * FROM employees", function (err, results) {
-    //     console.table(results);
-    // });
+  db.query(query, function (err, result) {
+    console.table(result);
+    promptStart();
+  });
+}
+
+//Should allow user to add a Department to the employees_db. Will need a prompt an INSERT INTO.
+function addDepartment() {
+
+}
+
+//Should allow user to add a Role to the employees_db. Will need a prompt and INSERT INTO.
+function addRole() {
+
+}
+
+//Should allow user to add an Employee to the employees_db. Will need a prompt and INSERT INTO.
+function addEmployee() {
+
+}
+
+//Should allow user to update an employee's Role. Will need prompt and UPDATE query.
+function updateEmployeeRole() {
+
+}
+
+//Should allow user to exit the app.
+function exitApp() {
+    
 }
