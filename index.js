@@ -18,7 +18,10 @@ const db = mysql.createConnection(
   //node index.js --> works/connection established
 );
 
+//displays a welcome for the user
+function welcomeScreen() {
 
+};
 
 //inquirer prompts start
 
@@ -70,7 +73,7 @@ function promptStart() {
           break;
       }
     });
-}
+};
 
 //Stub-out functions for views Departments/Roles/Employees. db.query
 
@@ -80,7 +83,7 @@ function viewDepartments() {
     console.table(results);
     promptStart();
   });
-}
+};
 
 //Should return title, role id, department that the role belongs to and the salary for that role.
 function viewRoles() {
@@ -88,7 +91,7 @@ function viewRoles() {
     console.table(results);
     promptStart();
   });
-}
+};
 
 //Should return table with employee id, fname/lname, title, dept, salary and manager
 function viewEmployees() {
@@ -103,29 +106,118 @@ function viewEmployees() {
     console.table(result);
     promptStart();
   });
-}
+};
 
 //Should allow user to add a Department to the employees_db. Will need a prompt an INSERT INTO.
 function addDepartment() {
-
-}
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "addDept",
+        message:
+          "What is the name of the Department that you would like to add?",
+      },
+    ])
+    .then(function (answer) {
+      console.log(answer);
+      //Add query here
+      promptStart();
+    });
+};
 
 //Should allow user to add a Role to the employees_db. Will need a prompt and INSERT INTO.
 function addRole() {
-
-}
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "addRoleName",
+        message: "What role would you like to add to the database?",
+      },
+      {
+        type: "input",
+        name: "addRoleSalary",
+        message: "What is the salary of the role?",
+      },
+      {
+        type: "input",
+        name: "addRoleDept",
+        message: "Which department does the role belong to?",
+      },
+    ])
+    .then(function (answer) {
+      //Add query here
+      promptStart();
+      console.log(answer);
+    });
+};
 
 //Should allow user to add an Employee to the employees_db. Will need a prompt and INSERT INTO.
 function addEmployee() {
-
-}
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "addFName",
+        message:
+          "What is the first name of the employee that you would like to add to the database?",
+      },
+      {
+        type: "input",
+        name: "addLName",
+        message:
+          "What is the last name of the employee that you would like to add to the database?",
+      },
+      {
+        type: "input",
+        name: "addERole",
+        message: "What is the role of the new Employee?",
+      },
+      {
+        type: "input",
+        name: "addManagerFName",
+        message: "What is the first name of the new Employee's Manager?",
+      },
+      {
+        type: "input",
+        name: "addManagerLName",
+        message: "What is the last name of the new Employee's Manager?",
+      },
+    ])
+    .then(function (answer) {
+      //Add query here
+      promptStart();
+      console.log(answer);
+    });
+};
 
 //Should allow user to update an employee's Role. Will need prompt and UPDATE query.
 function updateEmployeeRole() {
-
-}
+    inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "selectEmployee",
+        message: "Which Employee would you like to Update?",
+        choice: []
+      },
+      {
+          type: "input",
+          name: "newUpdatedEmployeeRole",
+          message: "What is the new role that you would like to assign to the Employee?"
+      }
+    ])
+    .then(function (answer) {
+      console.log(answer);
+      //Add query here
+      promptStart();
+    });
+};
 
 //Should allow user to exit the app.
 function exitApp() {
-    
-}
+
+};
+
+
