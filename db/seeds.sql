@@ -1,5 +1,5 @@
 /*Department Table Seeds*/
-INSERT INTO departments (name)
+INSERT INTO departments (dname)
 VALUES
 ("Sales")
 ("Engineering")
@@ -7,7 +7,7 @@ VALUES
 ("Legal")
 
 /*Role Table Seeds*/
-INSERT INTO role (title, salary, department_id)
+INSERT INTO roles (title, salary, department_id)
 VALUES
 ("Sales Lead", 100000, 1)
 ("Salesperson", 80000, 1)

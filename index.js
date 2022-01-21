@@ -74,3 +74,36 @@ function startApp() {
       }
     });
 }
+
+//Stub-out functions for views Departments/Roles/Employees. db.query
+
+//Should return table with department name and id
+function viewDepartments() {
+  db.query("SELECT * FROM departments", function (err, results) {
+    console.table(results);
+  });
+}
+
+//Should return title, role id, department that the role belongs to and the salary for that role.
+function viewRoles() {
+  db.query("SELECT * FROM roles", function (err, results) {
+    console.table(results);
+  });
+}
+
+//Should return table with employee id, fname/lname, title, dept, salary and manager
+function viewEmployees() {
+    const query = 
+    "SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, departments.dname AS department, employees.manager_id" +
+    "FROM employees" +
+    "JOIN roles ON roles.id = employees.role_id" +
+    "JOIN departments ON roles.department_id = departments.id" +
+    "ORDER BY employees.id;";
+
+    db.query(query, function (err, result) {
+        console.table(result);
+    });
+    // db.query("SELECT * FROM employees", function (err, results) {
+    //     console.table(results);
+    // });
+}
