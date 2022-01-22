@@ -4,9 +4,13 @@
 //DEPENDENCIES
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
+const fs = require("fs");
 const consoleTable = require("console.table");
+const figlet = require("figlet");
 
-//Connect to the db
+const seedQuery = fs.readFileSync("./db/seeds.sql");
+
+//Create connection to the db
 const db = mysql.createConnection(
   {
     host: "localhost",
@@ -14,14 +18,36 @@ const db = mysql.createConnection(
     password: "password",
     database: "employees_db",
   },
-  console.log("You are now connected to the employees_db!")
+  console.log(
+    "================================WELCOME TO THE====================================="
+  )
   //node index.js --> works/connection established
 );
 
-//displays a welcome for the user
-function welcomeScreen() {
+//Connects server to the db
+db.connect(function (err) {
+  if (err) throw err;
+  //displays a welcome for the user
+  figlet("Employee Tracker", function (err, data) {
+    if (err) {
+      console.log("Uh oh, somethings not quite right...");
+      console.dir(err);
+      return;
+    }
+    console.log(data);
+    console.log(
+      "===================================================================================="
+    );
+    console.log();
+  });
+});
 
-};
+db.query(seedQuery, (err) => {
+  if (err) {
+    throw err;
+  }
+});
+promptStart();
 
 //inquirer prompts start
 
@@ -32,7 +58,7 @@ function promptStart() {
       name: "initQuestions",
       message:
         "Please choose an action from the options provided below (Use the arrow keys).",
-      choice: [
+      choices: [
         "View all Departments",
         "View all Roles",
         "View all Employees",
@@ -73,7 +99,7 @@ function promptStart() {
           break;
       }
     });
-};
+}
 
 //Stub-out functions for views Departments/Roles/Employees. db.query
 
@@ -83,7 +109,7 @@ function viewDepartments() {
     console.table(results);
     promptStart();
   });
-};
+}
 
 //Should return title, role id, department that the role belongs to and the salary for that role.
 function viewRoles() {
@@ -91,7 +117,7 @@ function viewRoles() {
     console.table(results);
     promptStart();
   });
-};
+}
 
 //Should return table with employee id, fname/lname, title, dept, salary and manager
 function viewEmployees() {
@@ -106,7 +132,7 @@ function viewEmployees() {
     console.table(result);
     promptStart();
   });
-};
+}
 
 //Should allow user to add a Department to the employees_db. Will need a prompt an INSERT INTO.
 function addDepartment() {
@@ -124,7 +150,7 @@ function addDepartment() {
       //Add query here
       promptStart();
     });
-};
+}
 
 //Should allow user to add a Role to the employees_db. Will need a prompt and INSERT INTO.
 function addRole() {
@@ -151,7 +177,7 @@ function addRole() {
       promptStart();
       console.log(answer);
     });
-};
+}
 
 //Should allow user to add an Employee to the employees_db. Will need a prompt and INSERT INTO.
 function addEmployee() {
@@ -190,34 +216,32 @@ function addEmployee() {
       promptStart();
       console.log(answer);
     });
-};
+}
 
 //Should allow user to update an employee's Role. Will need prompt and UPDATE query.
 function updateEmployeeRole() {
-    inquirer
+  inquirer
     .prompt([
       {
         type: "list",
         name: "selectEmployee",
         message: "Which Employee would you like to Update?",
-        choice: []
+        //need to access the employees from the db to generate list
+        choices: [],
       },
       {
-          type: "input",
-          name: "newUpdatedEmployeeRole",
-          message: "What is the new role that you would like to assign to the Employee?"
-      }
+        type: "input",
+        name: "newUpdatedEmployeeRole",
+        message:
+          "What is the new role that you would like to assign to the Employee?",
+      },
     ])
     .then(function (answer) {
       console.log(answer);
       //Add query here
       promptStart();
     });
-};
+}
 
 //Should allow user to exit the app.
-function exitApp() {
-
-};
-
-
+function exitApp() {}
