@@ -44,7 +44,7 @@ function promptStart() {
       type: "list",
       name: "initQuestions",
       message:
-        "Please choose an action from the options provided below (Use the arrow keys).",
+        "Please choose an action from the options provided below.",
       choices: [
         "View all Departments",
         "View all Roles",
