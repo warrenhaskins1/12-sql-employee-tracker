@@ -91,7 +91,7 @@ function promptStart() {
 //Exit app
 function exitApp() {
   console.log("Goodbye!");
-  db.end;
+  db.end();
 }
 
 //Should return table with department name and id
